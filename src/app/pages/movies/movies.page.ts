@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MoviedbService } from 'src/app/services/moviedb.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-movies',
@@ -9,27 +10,30 @@ import { MoviedbService } from 'src/app/services/moviedb.service';
 export class MoviesPage implements OnInit {
 
   movies = [];
-
-  constructor(private mDBService: MoviedbService) { }
+  private param:string = "top_rated";
+  constructor(private mDBService: MoviedbService, private loadingController: LoadingController) { }
 
   // método é executado quando se entra na página
   ngOnInit() {
-    this.topRatedMovies()
+    this.consultaFilmes()
   }
 
+  async consultaFilmes() {
+    // loading..
+    const loading = await this.loadingController.create({
+      message: 'Carregando filmes...'
+    });
+    // exibir a caixa de dialogo
+    await loading.present();
 
-  topRatedMovies() {
-    this.mDBService.getTopRatedMovies().subscribe(
+    await this.mDBService.getMovies(this.param).subscribe(
       data=>{
-        // pega a resposta 
-        let resposta = (data as any)._body;
-        // converte para obj JSON
-        resposta = JSON.parse(resposta);
-        // atribui a resposta ao array de filmes
-        this.movies = resposta;
+        this.movies = data;
+        loading.dismiss();
       },
       error=>{
         console.log(error);
+        loading.dismiss();
       }
     ).add();
   }
