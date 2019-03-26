@@ -8,14 +8,14 @@
 </ion-header>
 
 <ion-content>
-  <ion-card class="welcome-card">
-    <ion-img src="http://cdn.collider.com/wp-content/uploads/2018/12/once-upon-a-deadpool-poster-slice-600x200.jpg"></ion-img>
+  <ion-card class="welcome-card" *ngFor="let movie of movies.results">
+    <ion-img src="https://image.tmdb.org/t/p/w500/{{movie.backdrop_path}}"></ion-img>
     <ion-card-header>
-      <ion-card-subtitle>Lançamento</ion-card-subtitle>
-      <ion-card-title class="text-center">Once upon a DeadPool</ion-card-title>
+      <ion-card-subtitle>Popularidade: {{movie.popularity}}</ion-card-subtitle>
+      <ion-card-title class="text-center">{{movie.title}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <p>Novo filme do Deadpool.</p>
+      <p>{{movie.overview}}</p>
     </ion-card-content>
   </ion-card>
 </ion-content>
