@@ -14,6 +14,9 @@ export class MoviedbService {
 
   private URL_API:string = "https://api.themoviedb.org/3";
   private API_KEY:string = "9a0dfe183358189bf99b0d7b55564507";
+  private rating = {
+    "value": ""
+  };
   
   constructor(private http: HttpClient) { }
 
@@ -26,6 +29,14 @@ export class MoviedbService {
     );
   }
 
+  addRating(rating_value, param:string): Observable<any> {
+    const url = `${this.URL_API}/movie/${param}?api_key=${this.API_KEY}`;
+    this.rating.value = rating_value;
+    return this.http.post<any>(url, this.rating, httpOptions).pipe(
+      tap(_ => console.log(`rating adicionado url= ${rating_value}`)),
+      catchError(this.handleError<any>('Falha ao adicionar rating pelo parametro = ${param}'))
+    );
+  }
   // método privado para exibir o erro
   private handleError<T>(Operator = 'operation', result?: T) {
     return (error: any):Observable<T> => {
