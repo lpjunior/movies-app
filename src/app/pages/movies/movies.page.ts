@@ -10,7 +10,7 @@ import { LoadingController } from '@ionic/angular';
 export class MoviesPage implements OnInit {
 
   movies = [];
-  private param:string = "top_rated";
+  private param:string = "popular";
   constructor(private mDBService: MoviedbService, private loadingController: LoadingController) { }
 
   // método é executado quando se entra na página
