@@ -37,5 +37,8 @@ export class MoviesPage implements OnInit {
       }
     ).add();
   }
-
+  
+  openDetails(id: string) {
+    console.log(`ID do filme: ${id}`);
+  }
 }
