@@ -37,5 +37,4 @@ export class MoviesPage implements OnInit {
       }
     ).add();
   }
-
 }

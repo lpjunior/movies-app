@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card class="welcome-card" *ngFor="let movie of movies.results">
+  <ion-card class="welcome-card" *ngFor="let movie of movies.results" routerLink="/details/{{movie.id}}">
     <ion-img src="https://image.tmdb.org/t/p/w500/{{movie.backdrop_path}}"></ion-img>
     <ion-card-header>
       <ion-card-subtitle>Popularidade: {{movie.popularity}}</ion-card-subtitle>

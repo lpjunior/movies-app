@@ -17,7 +17,6 @@ export class MoviedbService {
   private rating = {
     "value": ""
   };
-  
   constructor(private http: HttpClient) { }
 
   // função (método) terá um retorno do tipo Observable
@@ -37,6 +36,7 @@ export class MoviedbService {
       catchError(this.handleError<any>('Falha ao adicionar rating pelo parametro = ${param}'))
     );
   }
+
   // método privado para exibir o erro
   private handleError<T>(Operator = 'operation', result?: T) {
     return (error: any):Observable<T> => {
