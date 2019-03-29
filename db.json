@@ -1,34 +1,20 @@
 {
-  "beer": [
+  "rating": [
     {
       "id": 1,
-      "title": "Duff",
-      "litro": "2,5lt"
-    }
-  ],
-  "comments": [
+      "movie_id": 1,
+      "rating": 3.5
+    },
     {
-      "id": 1,
-      "body": "Very well",
-      "postId": 1
+      "movie_id": 2,
+      "rating": 5,
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
     }
-  ],
-  "profile": {
-    "id": 1,
-    "name": "Home Simpson",
-    "childrens": [
-      { 
-        "id": 1,
-        "name": "Mag Simpson"
-      },
-      {
-        "id": 2,
-        "name": "Bart Simpson"
-      },
-      {
-        "id": 3,
-        "name": "Eliza Simpson"
-      }
-    ] 
-  }
+  ]
 }
