@@ -10,8 +10,9 @@ import { LoadingController } from '@ionic/angular';
 export class MoviesPage implements OnInit {
 
   movies = [];
-  private param:string = "popular";
+  private param:string;
   constructor(private mDBService: MoviedbService, private loadingController: LoadingController) { }
+  private movie_name:string;
 
   // método é executado quando se entra na página
   ngOnInit() {
@@ -26,6 +27,7 @@ export class MoviesPage implements OnInit {
     // exibir a caixa de dialogo
     await loading.present();
 
+    this.param = (this.movie_name !== undefined) ? `search/movie?query=${this.movie_name}&include_adult=true&` : "movie/popular?";
     await this.mDBService.getMovies(this.param).subscribe(
       data=>{
         this.movies = data;
@@ -36,5 +38,13 @@ export class MoviesPage implements OnInit {
         loading.dismiss();
       }
     ).add();
+  }
+
+  doRefresh(event) {
+    this.consultaFilmes();
+
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
   }
 }

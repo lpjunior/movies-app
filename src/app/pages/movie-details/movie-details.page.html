@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-card class="welcome-card">
-    <ion-img src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}"></ion-img>
+    <ion-img class="img-thumbnail rounded" *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}"></ion-img>
     <ion-card-header>
       <ion-card-subtitle>Genero: <ion-note *ngFor="let g of movie.genres">{{g.name}} </ion-note></ion-card-subtitle>
       <ion-card-title class="text-center">{{movie.title}}</ion-card-title>

@@ -8,8 +8,15 @@
 </ion-header>
 
 <ion-content>
+  <!-- Searchbar with a cancel button and custom cancel button text -->
+  <ion-searchbar [(ngModel)]="movie_name" showCancelButton cancelButtonText="Cancelar" placeholder="Digite o nome de um filme ou série" color="dark" animated (change)="consultaFilmes()"></ion-searchbar>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Atualizar" refreshingSpinner="circles"
+      refreshingText="Atualizando...">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-card class="welcome-card" *ngFor="let movie of movies.results" routerLink="/details/{{movie.id}}">
-    <ion-img src="https://image.tmdb.org/t/p/w500/{{movie.backdrop_path}}"></ion-img>
+    <ion-img *ngIf="movie.backdrop_path" src="https://image.tmdb.org/t/p/w500/{{movie.backdrop_path}}"></ion-img>
     <ion-card-header>
       <ion-card-subtitle>Popularidade: {{movie.popularity}}</ion-card-subtitle>
       <ion-card-title class="text-center">{{movie.title}}</ion-card-title>

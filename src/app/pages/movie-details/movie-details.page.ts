@@ -31,7 +31,7 @@ export class MovieDetailsPage implements OnInit {
     await loading.present();
 
     // resgatar o ID passado 'details/:id'
-    await this.mDBService.getMovies(this.route.snapshot.paramMap.get('id')).subscribe(
+    await this.mDBService.getMovies(`movie/${this.route.snapshot.paramMap.get('id')}?`).subscribe(
       data=>{
         this.movie = data;
         console.log(this.movie);
