@@ -22,12 +22,9 @@ export class RatingService {
     );
   }
 
-  addRating(): Observable<any> {
-    let rate = {
-      "movie_id": 122,
-      "rating": 5,
-    }
-    return this.http.post(URL_API, JSON.stringify(rate), httpOptions)
+  addRating(rate): Observable<any> {
+
+    return this.http.post(URL_API, rate, httpOptions)
       .pipe(
         catchError(this.handleError<any>(`Falha ao adicionar rating = ${rate.rating}`))
       );
