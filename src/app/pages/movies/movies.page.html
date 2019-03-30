@@ -8,7 +8,23 @@
 </ion-header>
 
 <ion-content>
-  <ion-card class="welcome-card" *ngFor="let movie of movies.results" routerLink="/details/{{movie.id}}">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Atualizar"
+      refreshingSpinner="circles"
+      refreshingText="Atualizando...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-searchbar 
+    [(ngModel)]="movie_name"
+    showCancelButton 
+    cancelButtonText="Cancelar" 
+    placeholder="Localize o filme" 
+    color="dark" 
+    animated
+    (change)="consultaFilmes()"></ion-searchbar>
+  <ion-card class="welcome-card" *ngFor="let movie of movies" routerLink="/details/{{movie.id}}">
     <ion-img src="https://image.tmdb.org/t/p/w500/{{movie.backdrop_path}}"></ion-img>
     <ion-card-header>
       <ion-card-subtitle>Popularidade: {{movie.popularity}}</ion-card-subtitle>
