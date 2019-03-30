@@ -29,8 +29,6 @@ export class MoviesPage implements OnInit {
     // usando if ternario
     index = (typeof index === "undefined") ? 3 : Math.floor(Math.random() * 4);
     let param = (typeof this.movie_name === "undefined") ? `movie/${this.arrayCategory[index]}?` : `search/movie?query=${this.movie_name}&include_adult=false&`;
-    console.log(this.movie_name);
-    //https://api.themoviedb.org/3/movie/upcoming?api_key=${this.API_KEY}&language=pt-BR
     // loading..
     const loading = await this.loadingController.create({
       message: 'Carregando filmes...'

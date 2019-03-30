@@ -5,7 +5,7 @@ import { tap, catchError } from 'rxjs/operators';
 
 const URL_API = `http://localhost:3000/rating`;
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/jso;charset=utf-8' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json;charset=utf-8' })
 };
 
 @Injectable({
