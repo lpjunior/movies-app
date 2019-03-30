@@ -1,9 +1,14 @@
 {
   "rating": [
     {
-      "movie_id": "450001",
-      "rating": "4",
+      "movie_id": "166428",
+      "rating": "1.1",
       "id": 1
+    },
+    {
+      "movie_id": "508763",
+      "rating": "5.6",
+      "id": 2
     }
   ]
 }

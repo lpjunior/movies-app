@@ -34,7 +34,7 @@ export class MovieDetailsPage implements OnInit {
   async addRate() {
 
     this.rate.movie_id = this.route.snapshot.paramMap.get('id');
-    this.rate.rating = (Math.random() * 6).toFixed();
+    this.rate.rating = (Math.random() * 6).toFixed(1);
     // resgatar o ID retornado do método para redirecionar para página do filme 'details/:id'
     await this.rateService.addRating(this.rate).subscribe(
       result=>{

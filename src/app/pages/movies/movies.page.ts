@@ -23,12 +23,12 @@ export class MoviesPage implements OnInit {
   async consultaFilmes(index?) {    
     // verifica se o parametro index está setado, senão ele um valor random
 
-    // usando test if
-    //if(index === 'undefined') index = 4;
+    // verifica se o index não está definido.
+    if (typeof index === 'undefined') index = 3;
 
-    // usando if ternario
-    index = (typeof index === "undefined") ? 3 : Math.floor(Math.random() * 4);
+    // Define o parametro a ser passado
     let param = (typeof this.movie_name === "undefined") ? `movie/${this.arrayCategory[index]}?` : `search/movie?query=${this.movie_name}&include_adult=false&`;
+
     // loading..
     const loading = await this.loadingController.create({
       message: 'Carregando filmes...'
@@ -45,13 +45,17 @@ export class MoviesPage implements OnInit {
         console.log(error);
         loading.dismiss();
       }
-    ).add();
+    )
+  }
+
+  async atualizaFilmes() {
+    // número random
+    let index = Math.floor(Math.random() * 4);
+    this.consultaFilmes(index);
   }
 
   doRefresh(event) {
-    // número random
-    //let index = Math.floor(Math.random() * 5);
-    this.consultaFilmes('aleatorio');
+    this.atualizaFilmes();
     setTimeout(() => {
       event.target.complete();
     }, 2000);

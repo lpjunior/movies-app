@@ -23,7 +23,7 @@
     placeholder="Localize o filme" 
     color="dark" 
     animated
-    (change)="consultaFilmes()"></ion-searchbar>
+    (change)="atualizaFilmes()"></ion-searchbar>
   <ion-card class="welcome-card" *ngFor="let movie of movies" routerLink="/details/{{movie.id}}">
     <ion-img src="https://image.tmdb.org/t/p/w500/{{movie.backdrop_path}}"></ion-img>
     <ion-card-header>
