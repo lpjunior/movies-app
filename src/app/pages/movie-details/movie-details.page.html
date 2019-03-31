@@ -13,7 +13,7 @@
     <ion-card-header>
       <ion-card-subtitle>Genero: <ion-note *ngFor="let g of movie.genres">{{g.name}} </ion-note></ion-card-subtitle>
       <ion-list *ngIf="rate.rating; else setRating">
-        <ion-item>
+        <ion-item lines="none">
           <ion-label>Avaliação</ion-label>
           <ion-select [interfaceOptions]="customActionSheetOptions" (ionChange)="updateRate()" [(ngModel)]="rate.rating"
             interface="action-sheet" placeholder="Selecione">
@@ -29,7 +29,7 @@
       
       <ng-template #setRating>
         <ion-list>
-          <ion-item>
+          <ion-item lines="none">
             <ion-label>Avaliação</ion-label>
             <ion-select [interfaceOptions]="customActionSheetOptions" (ionChange)="addRate()" [(ngModel)]="rate.rating"
               interface="action-sheet" placeholder="Selecione">
@@ -44,15 +44,15 @@
           </ion-list>
       </ng-template>
 
-      <ion-card-subtitle>Lançamento: <ion-note >{{movie.release_date | date:'yyyy'}} </ion-note></ion-card-subtitle>
-      <ion-card-title class="text-center">{{movie.title}}</ion-card-title>
+      <ion-card-title class="text-center">{{movie.title}}
+        <ion-card-subtitle>Lançamento: <ion-note>{{movie.release_date | date:'yyyy'}}</ion-note></ion-card-subtitle>
+      </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <div *ngFor="let p of movie.production_companies">
-        <ion-img *ngIf="p.logo_path" src="https://image.tmdb.org/t/p/w500/{{p.logo_path}}"></ion-img>
-        <p *ngIf="!p.logo_path">{{p.name}}</p>
+      <div class="text-justify">{{movie.overview}}</div>
+      <div class="mt-5 text-center">
+        <ion-note *ngFor="let p of movie.production_companies">{{p.name}} </ion-note>
       </div>
-      <p class="mt-5">{{movie.overview}}</p>
     </ion-card-content>
   </ion-card>
 </ion-content>
