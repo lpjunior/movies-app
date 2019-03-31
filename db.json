@@ -9,6 +9,21 @@
       "movie_id": "508763",
       "rating": "5.6",
       "id": 2
+    },
+    {
+      "movie_id": "559",
+      "rating": "3",
+      "id": 3
+    },
+    {
+      "id": 4,
+      "movie_id": "450001",
+      "rating": "4"
+    },
+    {
+      "id": 5,
+      "movie_id": "438674",
+      "rating": "0"
     }
   ]
 }

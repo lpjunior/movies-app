@@ -16,8 +16,8 @@ export class RatingService {
   
   constructor(private http: HttpClient) { }
   
-  getRate(): any {
-    return this.http.get<any>(URL_API, httpOptions).pipe(
+  getRate(movieIdParam:string = ""): any {
+    return this.http.get<any>(`${URL_API}${movieIdParam}`, httpOptions).pipe(
       catchError(this.handleError<any>(`Falha no getRating`))
     );
   }
@@ -25,6 +25,14 @@ export class RatingService {
   addRating(rate): Observable<any> {
 
     return this.http.post(URL_API, rate, httpOptions)
+      .pipe(
+        catchError(this.handleError<any>(`Falha ao adicionar rating = ${rate.rating}`))
+      );
+  }
+
+  updateRating(rate:any): Observable<any> {
+
+    return this.http.put(`${URL_API}/${rate.id}`, rate, httpOptions)
       .pipe(
         catchError(this.handleError<any>(`Falha ao adicionar rating = ${rate.rating}`))
       );

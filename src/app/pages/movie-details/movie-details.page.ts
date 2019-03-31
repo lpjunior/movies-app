@@ -3,6 +3,7 @@ import { MoviedbService } from 'src/app/services/moviedb.service';
 import { LoadingController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RatingService } from 'src/app/services/rating.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-movie-details',
@@ -11,11 +12,11 @@ import { RatingService } from 'src/app/services/rating.service';
 })
 export class MovieDetailsPage implements OnInit {
 
-  private movie = {};
-
+  private movie: { [key: string]: any } = {};
   private rate = {
-    "movie_id": "",
-    "rating": ""
+    "id": null,
+    "movie_id": this.route.snapshot.paramMap.get('id'),
+    "rating": null
   };
 
   constructor(
@@ -25,38 +26,59 @@ export class MovieDetailsPage implements OnInit {
     private router: Router,
     private rateService: RatingService) {}
     
-  ngOnInit() {
-    this.consultaFilme();
-    this.addRate();
-    this.getRate();
+    ngOnInit() {
+      this.getRate();
+      this.consultaFilme();
+    }
+    
+    async addRate() {
+      
+      console.log('rate added');
+      
+      // resgatar o ID retornado do método para redirecionar para página do filme 'details/:id'
+      await this.rateService.addRating(this.rate).subscribe(
+        result=>{
+          this.consultaFilme();
+        },
+        error=>{
+        console.log(error);
+      }
+    )
   }
 
-  async addRate() {
+  async updateRate() {
 
-    this.rate.movie_id = this.route.snapshot.paramMap.get('id');
-    this.rate.rating = (Math.random() * 6).toFixed(1);
+    console.log('rate updated');
     // resgatar o ID retornado do método para redirecionar para página do filme 'details/:id'
-    await this.rateService.addRating(this.rate).subscribe(
+    await this.rateService.updateRating(this.rate).subscribe(
       result=>{
-        //let id = result['id'];
-        //this.router.navigate(['/details/' + id]);
+        let id = result['movie_id'];
+        this.router.navigate(['/details/' + id]);
       },
       error=>{
         console.log(error);
       }
     )
   }
+
   async getRate() {
-    // resgatar o ID passado 'details/:id'
-    await this.rateService.getRate().subscribe(
-      data=>{
-        console.log(data);
+    let param = `?movie_id=${this.route.snapshot.paramMap.get('id')}`;
+    await this.rateService.getRate(param).subscribe(
+      data => {
+        if (data.length > 0) {
+          this.rate = {
+            "id": data[0].id,
+            "movie_id": data[0].movie_id,
+            "rating": data[0].rating
+          };
+        }
       },
-      error=>{
+      error => {
         console.log(error);
       }
     )
   }
+    
   async consultaFilme() {
     // loading..
     const loading = await this.loadingController.create({
@@ -69,6 +91,7 @@ export class MovieDetailsPage implements OnInit {
     await this.mDBService.getMovies(`movie/${this.route.snapshot.paramMap.get('id')}?`).subscribe(
       data=>{
         this.movie = data;
+      
         loading.dismiss();
       },
       error=>{
@@ -77,4 +100,9 @@ export class MovieDetailsPage implements OnInit {
       }
     )
   }
+
+  private customActionSheetOptions: any = {
+    header: 'Avaliação',
+    subHeader: 'Defina uma avaliação para esse filme'
+  };
 }

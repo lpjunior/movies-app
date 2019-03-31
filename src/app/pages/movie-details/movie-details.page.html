@@ -12,6 +12,39 @@
     <ion-img class="img-thumbnail rounded" *ngIf="movie.poster_path" src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}"></ion-img>
     <ion-card-header>
       <ion-card-subtitle>Genero: <ion-note *ngFor="let g of movie.genres">{{g.name}} </ion-note></ion-card-subtitle>
+      <ion-list *ngIf="rate.rating; else setRating">
+        <ion-item>
+          <ion-label>Avaliação</ion-label>
+          <ion-select [interfaceOptions]="customActionSheetOptions" (ionChange)="updateRate()" [(ngModel)]="rate.rating"
+            interface="action-sheet" placeholder="Selecione">
+            <ion-select-option value="0">0</ion-select-option>
+            <ion-select-option value="1">1</ion-select-option>
+            <ion-select-option value="2">2</ion-select-option>
+            <ion-select-option value="3">3</ion-select-option>
+            <ion-select-option value="4">4</ion-select-option>
+            <ion-select-option value="5">5</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+      
+      <ng-template #setRating>
+        <ion-list>
+          <ion-item>
+            <ion-label>Avaliação</ion-label>
+            <ion-select [interfaceOptions]="customActionSheetOptions" (ionChange)="addRate()" [(ngModel)]="rate.rating"
+              interface="action-sheet" placeholder="Selecione">
+              <ion-select-option value="0">0</ion-select-option>
+              <ion-select-option value="1">1</ion-select-option>
+              <ion-select-option value="2">2</ion-select-option>
+              <ion-select-option value="3">3</ion-select-option>
+              <ion-select-option value="4">4</ion-select-option>
+              <ion-select-option value="5">5</ion-select-option>
+            </ion-select>
+          </ion-item>
+          </ion-list>
+      </ng-template>
+
+      <ion-card-subtitle>Lançamento: <ion-note >{{movie.release_date | date:'yyyy'}} </ion-note></ion-card-subtitle>
       <ion-card-title class="text-center">{{movie.title}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
