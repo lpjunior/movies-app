@@ -3,7 +3,6 @@ import { MoviedbService } from 'src/app/services/moviedb.service';
 import { LoadingController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RatingService } from 'src/app/services/rating.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-movie-details',
@@ -12,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class MovieDetailsPage implements OnInit {
 
-  private movie: { [key: string]: any } = {};
+  private movie = {};
   private rate = {
     "id": null,
     "movie_id": this.route.snapshot.paramMap.get('id'),
@@ -32,9 +31,6 @@ export class MovieDetailsPage implements OnInit {
     }
     
     async addRate() {
-      
-      console.log('rate added');
-      
       // resgatar o ID retornado do método para redirecionar para página do filme 'details/:id'
       await this.rateService.addRating(this.rate).subscribe(
         result=>{
@@ -47,8 +43,6 @@ export class MovieDetailsPage implements OnInit {
   }
 
   async updateRate() {
-
-    console.log('rate updated');
     // resgatar o ID retornado do método para redirecionar para página do filme 'details/:id'
     await this.rateService.updateRating(this.rate).subscribe(
       result=>{

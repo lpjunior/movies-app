@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { of, Observable } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 
-const URL_T = `http://localhost:3000/rating`;
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json;charset=utf-8'})
 };
@@ -12,12 +11,6 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class MoviedbService {
-  getRate(): any {
-    return this.http.get<any>(URL_T, httpOptions).pipe(
-      catchError(this.handleError<any>(`Falha no getRating`))
-    );
-  }
-
   private URL_API:string = "https://api.themoviedb.org/3";
   private API_KEY:string = "9a0dfe183358189bf99b0d7b55564507";
 
