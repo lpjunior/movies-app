@@ -9,3 +9,8 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+ion-menu, ion-menu-button, ion-menu-controller, ion-menu-toggle, ion-toggle, ion-toolbar {
+    --background: #343a40;
+    --color: var(--ion-color-secondary-contrast,#f4f4f4);
+}
